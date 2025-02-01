@@ -13,7 +13,11 @@
         <form asp-action="Create">
             <div class="form-group">
                 <label asp-for="StudentId" class="control-label">Student</label>
-                <select asp-for="StudentId" class="form-control" asp-items="@(new SelectList(ViewData["Students"] as List<Student>, "StudentId", "FirstName"))">
+                <select asp-for="StudentId" class="form-control" asp-items="@(new SelectList(
+                    (ViewData["Students"] as List<Student>).Select(s => new {
+                        s.StudentId,
+                        FullName = s.FirstName + " " + s.LastName
+                    }), "StudentId", "FullName"))">
                     <option value="">Select a student</option>
                 </select>
                 <span asp-validation-for="StudentId" class="text-danger"></span>
@@ -27,7 +31,11 @@
             </div>
             <div class="form-group">
                 <label asp-for="TeacherId" class="control-label">Teacher</label>
-                <select asp-for="TeacherId" class="form-control" asp-items="@(new SelectList(ViewData["Teachers"] as List<Teacher>, "TeacherId", "FirstName"))">
+                <select asp-for="TeacherId" class="form-control" asp-items="@(new SelectList(
+                    (ViewData["Teachers"] as List<Teacher>).Select(t => new {
+                        t.TeacherId,
+                        FullName = t.FirstName + " " + t.LastName
+                    }), "TeacherId", "FullName"))">
                     <option value="">Select a teacher</option>
                 </select>
                 <span asp-validation-for="TeacherId" class="text-danger"></span>

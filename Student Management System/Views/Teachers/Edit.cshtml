@@ -19,7 +19,15 @@
 
     <div class="form-group">
         <label asp-for="Specialization" class="control-label">Specialization</label>
-        <input asp-for="Specialization" class="form-control" />
+        <select asp-for="Specialization" class="form-control">
+            <option value="">Select Specialization</option>
+            <option value="Math">Math</option>
+            <option value="IT">IT</option>
+            <option value="Biology">Biology</option>
+            <option value="Chemistry">Chemistry</option>
+            <option value="Physics">Physics</option>
+            <option value="Deutsch">Deutsch</option>
+        </select>
         <span asp-validation-for="Specialization" class="text-danger"></span>
     </div>
     <br />

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Student_Management_System.Data;
 using Student_Management_System.Models;
 
@@ -23,7 +24,18 @@ namespace Student_Management_System.Controllers
         [AllowAnonymous]
         public IActionResult Details(Guid id)
         {
-            var course = _context.Courses.FirstOrDefault(e => e.CourseId == id);
+            var course = _context.Courses
+                .Include(s => s.Enrollments)
+                    .ThenInclude(e => e.Teacher)
+                .Include(s => s.Enrollments)
+                    .ThenInclude(e => e.Student)
+                .FirstOrDefault(e => e.CourseId == id);
+
+
+
+
+
+
             if (course == null)
             {
                 return NotFound();

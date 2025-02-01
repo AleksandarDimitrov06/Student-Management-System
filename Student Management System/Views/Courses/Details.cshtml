@@ -5,6 +5,40 @@
 <p><strong>CourceName:</strong> @Model.CourseName</p>
 <p><strong>CourceDescription:</strong> @Model.Description</p>
 
+<br />
+
+@if (Model.Enrollments != null && Model.Enrollments.Count > 0)
+{
+    <h4><strong>Enrollments</strong></h4>
+    <table class="table table-striped" style="border: 1px solid #ddd;">
+        <thead>
+            <tr>
+                <th>Teacher</th>
+                <th>Student</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var enrollment in Model.Enrollments)
+            {
+                <tr>
+                    <td>@enrollment.Teacher.FirstName @enrollment.Teacher.LastName</td>
+                    <td>@enrollment.Student.FirstName @enrollment.Student.LastName</td>
+                    <td>@enrollment.EnrollmentDate</td>
+                    <td>
+                        <a href="@Url.Action("Details", "Enrollments", new { id = enrollment.EnrollmentId })" class="btn btn-link">Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h5><strong>Enrollments:</strong> No enrollments for this course!</h5>
+}
+
 <a href="@Url.Action("Index", "Courses")" class="btn btn-secondary">Back to Courses</a>
 <a href="@Url.Action("Edit", "Courses", new { id = @Model.CourseId })" class="btn btn-primary">Edit Course</a>
 

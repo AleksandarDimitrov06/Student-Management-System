@@ -71,14 +71,6 @@ namespace Student_Management_System.Controllers
                     ViewData["Teachers"] = _context.Teachers.ToList();
                     return View(enrollment);
                 }
-
-       
-                if (enrollment.Student.Enrollments == null)
-                {
-                    enrollment.Student.Enrollments = new List<Enrollment>();
-                }
-                enrollment.Student.Enrollments.Add(enrollment);
-
              
                 _context.Enrollments.Add(enrollment);
                 _context.SaveChanges();

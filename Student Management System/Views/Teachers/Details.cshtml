@@ -6,8 +6,44 @@
 <p><strong>LastName:</strong> @Model.LastName</p>
 <p><strong>Specialization:</strong> @Model.Specialization</p>
 
+@if (Model.Enrollments != null && Model.Enrollments.Count > 0)
+{
+    <h4><strong>Enrollments</strong></h4>
+    <table class="table table-striped" style="border: 1px solid #ddd;">
+        <thead>
+            <tr>
+                <th>Course</th>
+                <th>Student</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var enrollment in Model.Enrollments)
+            {
+                <tr>
+                    <td>@enrollment.Course.CourseName</td>
+                    <td>@enrollment.Student.FirstName @enrollment.Student.LastName</td>
+                    <td>@enrollment.EnrollmentDate</td>
+                    <td>
+                        <a href="@Url.Action("Details", "Enrollments", new { id = enrollment.EnrollmentId })" class="btn btn-link">Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h5><strong>Enrollments:</strong> No enrollments for this teacher!</h5>
+}
+
+
 <a href="@Url.Action("Index", "Teachers")" class="btn btn-secondary">Back to Teachers</a>
 <a href="@Url.Action("Edit", "Teachers", new { id = @Model.TeacherId })" class="btn btn-primary">Edit Teacher</a>
+
+
+
 
 <form asp-action="Delete" method="post" style="display:inline;">
     <input type="hidden" name="id" value="@Model.TeacherId" />
