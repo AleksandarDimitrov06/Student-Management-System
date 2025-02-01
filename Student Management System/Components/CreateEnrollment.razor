@@ -1,0 +1,72 @@
+﻿@page "/enrollments/create"
+@using Microsoft.AspNetCore.Components.Forms
+@using Student_Management_System.Models
+@inject HttpClient Http
+@inject NavigationManager Navigation
+
+<h3>Create Enrollment</h3>
+
+<EditForm Model="@enrollment" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label for="student">Student</label>
+        <InputSelect id="student" @bind-Value="enrollment.StudentId" class="form-control">
+            <option value="">Select a student</option>
+            @foreach (var student in students)
+            {
+                <option value="@student.StudentId">@student.FirstName @student.LastName</option>
+            }
+        </InputSelect>
+    </div>
+
+    <div class="form-group">
+        <label for="course">Course</label>
+        <InputSelect id="course" @bind-Value="enrollment.CourseId" class="form-control">
+            <option value="">Select a course</option>
+            @foreach (var course in courses)
+            {
+                <option value="@course.CourseId">@course.CourseName</option>
+            }
+        </InputSelect>
+    </div>
+
+    <div class="form-group">
+        <label for="teacher">Teacher</label>
+        <InputSelect id="teacher" @bind-Value="enrollment.TeacherId" class="form-control">
+            <option value="">Select a teacher</option>
+            @foreach (var teacher in teachers)
+            {
+                <option value="@teacher.TeacherId">@teacher.FirstName @teacher.LastName</option>
+            }
+        </InputSelect>
+    </div>
+
+    <div class="form-group">
+        <label for="enrollmentDate">Enrollment Date</label>
+        <InputDate id="enrollmentDate" @bind-Value="enrollment.EnrollmentDate" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create</button>
+</EditForm>
+
+@code {
+    private Enrollment enrollment = new Enrollment();
+    private List<Student> students = new List<Student>();
+    private List<Course> courses = new List<Course>();
+    private List<Teacher> teachers = new List<Teacher>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        students = await Http.GetFromJsonAsync<List<Student>>("api/students");
+        courses = await Http.GetFromJsonAsync<List<Course>>("api/courses");
+        teachers = await Http.GetFromJsonAsync<List<Teacher>>("api/teachers");
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        await Http.PostAsJsonAsync("api/enrollments", enrollment);
+        Navigation.NavigateTo("/enrollments");
+    }
+}

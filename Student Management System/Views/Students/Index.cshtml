@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Student_Management_System.Models.Student>
+
+<h1>All Students</h1>
+
+<ul>
+    @foreach (var student in Model)
+    {
+        <li>
+            <a href="@Url.Action("Details", "Students", new { id = student.StudentId })">
+                @student.FirstName @student.LastName
+            </a>
+        </li>
+    }
+</ul>
+
+<a href="@Url.Action("Create", "Students")" class="btn btn-primary">Create Student</a>
+
+
+
+

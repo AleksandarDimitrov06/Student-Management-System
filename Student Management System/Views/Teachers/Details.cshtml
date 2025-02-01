@@ -1,0 +1,15 @@
+﻿@model Student_Management_System.Models.Teacher
+
+<h2>Teacher_ID: @Model.TeacherId</h2>
+
+<p><strong>FirstName:</strong> @Model.FirstName</p>
+<p><strong>LastName:</strong> @Model.LastName</p>
+<p><strong>Specialization:</strong> @Model.Specialization</p>
+
+<a href="@Url.Action("Index", "Teachers")" class="btn btn-secondary">Back to Teachers</a>
+<a href="@Url.Action("Edit", "Teachers", new { id = @Model.TeacherId })" class="btn btn-primary">Edit Teacher</a>
+
+<form asp-action="Delete" method="post" style="display:inline;">
+    <input type="hidden" name="id" value="@Model.TeacherId" />
+    <button type="submit" class="btn btn-danger">Delete Teacher</button>
+</form>

@@ -1,0 +1,30 @@
+﻿@model Student_Management_System.Models.Teacher
+
+<h1>Edit Teacher</h1>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="TeacherId" />
+
+    <div class="form-group">
+        <label asp-for="FirstName" class="control-label">FirstName</label>
+        <input asp-for="FirstName" class="form-control" />
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="LastName" class="control-label">LastName</label>
+        <input asp-for="LastName" class="form-control" />
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Specialization" class="control-label">Specialization</label>
+        <input asp-for="Specialization" class="form-control" />
+        <span asp-validation-for="Specialization" class="text-danger"></span>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a href="@Url.Action("Index", "Teachers")" class="btn btn-secondary">Cancel</a>
+</form>
+
+

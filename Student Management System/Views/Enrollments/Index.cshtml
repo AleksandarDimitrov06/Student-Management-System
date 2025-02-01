@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Student_Management_System.Models.Enrollment>
+
+@{
+    ViewData["Title"] = "Enrollments";
+}
+
+<h1>Enrollments</h1>
+
+
+
+<table class="table table-striped" style="border: 1px solid #ddd;">
+    <thead>
+        <tr>
+            <th>Student</th>
+            <th>Course</th>
+            <th>Teacher</th>
+            <th>Enrollment Date</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var enrollment in Model)
+
+        {
+            <tr>
+                <td>@enrollment.Student?.FirstName @enrollment.Student?.LastName</td>
+                <td>@enrollment.Course?.CourseName</td>
+                <td>@enrollment.Teacher?.FirstName @enrollment.Teacher?.LastName</td>
+                <td>@enrollment.EnrollmentDate?.ToString("MM/dd/yyyy")</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@enrollment.EnrollmentId" class="btn btn-link">Details</a> |
+                    <a asp-action="Edit" asp-route-id="@enrollment.EnrollmentId" class="btn btn-link">Edit</a> |
+                    <form asp-action="Delete" method="post" style="display:inline;">
+                        <input type="hidden" name="id" value="@enrollment.EnrollmentId" />
+                        <button type="submit" class="btn btn-link">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New Enrollment</a>
+</p>

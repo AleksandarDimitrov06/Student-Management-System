@@ -1,0 +1,14 @@
+﻿@model Student_Management_System.Models.Course
+
+<h2>Course_ID: @Model.CourseId</h2>
+
+<p><strong>CourceName:</strong> @Model.CourseName</p>
+<p><strong>CourceDescription:</strong> @Model.Description</p>
+
+<a href="@Url.Action("Index", "Courses")" class="btn btn-secondary">Back to Courses</a>
+<a href="@Url.Action("Edit", "Courses", new { id = @Model.CourseId })" class="btn btn-primary">Edit Course</a>
+
+<form asp-action="Delete" method="post" style="display:inline;">
+    <input type="hidden" name="id" value="@Model.CourseId" />
+    <button type="submit" class="btn btn-danger">Delete Course</button>
+</form>

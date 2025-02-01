@@ -1,0 +1,16 @@
+﻿@model IEnumerable<Student_Management_System.Models.Course>
+
+<h1>All Courses</h1>
+
+<ul>
+    @foreach (var course in Model)
+    {
+        <li>
+            <a href="@Url.Action("Details", "Courses", new { id = course.CourseId })">
+                @course.CourseName
+            </a>
+        </li>
+    }
+</ul>
+
+<a href="@Url.Action("Create", "Courses")" class="btn btn-primary">Create Course</a>
