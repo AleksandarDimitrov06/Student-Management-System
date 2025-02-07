@@ -38,14 +38,14 @@ namespace Student_Management_System.Controllers
             return View(teacher);
         }
 
-        //  [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
-        // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Create(Teacher teacher)
         {
             if (ModelState.IsValid)
@@ -58,7 +58,7 @@ namespace Student_Management_System.Controllers
             return View(teacher);
         }
 
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Edit(Guid id)
         {
             var teacher = _context.Teachers.Find(id);
@@ -89,7 +89,7 @@ namespace Student_Management_System.Controllers
         }
 
         [HttpPost]
-        // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(Guid id)
         {
             var teacher = _context.Teachers.Find(id);

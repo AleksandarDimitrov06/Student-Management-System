@@ -43,14 +43,14 @@ namespace Student_Management_System.Controllers
             return View(course);
         }
 
-        //  [Authorize(Roles = "Admin")]
+          [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
-        // [Authorize(Roles = "Admin")]
+         [Authorize(Roles = "Admin")]
         public IActionResult Create(Course course)
         {
             if (ModelState.IsValid)
@@ -63,7 +63,7 @@ namespace Student_Management_System.Controllers
             return View(course);
         }
 
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Edit(Guid id)
         {
             var course = _context.Courses.Find(id);
@@ -75,7 +75,7 @@ namespace Student_Management_System.Controllers
         }
 
         [HttpPost]
-        // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Edit(Guid id, Course course)
         {
             if (id != course.CourseId)
@@ -93,7 +93,7 @@ namespace Student_Management_System.Controllers
         }
 
         [HttpPost]
-        // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(Guid id)
         {
             var course = _context.Courses.Find(id);

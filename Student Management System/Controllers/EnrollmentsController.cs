@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Student_Management_System.Data;
 using Student_Management_System.Models;
@@ -41,6 +42,7 @@ namespace Student_Management_System.Controllers
         }
 
         // GET: Enrollments/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             ViewData["Students"] = _context.Students.ToList();
@@ -52,6 +54,7 @@ namespace Student_Management_System.Controllers
         // POST: Enrollments/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public IActionResult Create(Enrollment enrollment)
         {
             if (ModelState.IsValid)
@@ -85,6 +88,7 @@ namespace Student_Management_System.Controllers
         }
 
         // GET: Enrollments/Edit/5
+        [Authorize(Roles = "Admin")]
         public IActionResult Edit(Guid id)
         {
             var enrollment = _context.Enrollments.Find(id);
@@ -101,6 +105,7 @@ namespace Student_Management_System.Controllers
         // POST: Enrollments/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public IActionResult Edit(Guid id, Enrollment enrollment)
         {
             if (id != enrollment.EnrollmentId)
@@ -123,6 +128,7 @@ namespace Student_Management_System.Controllers
         // POST: Enrollments/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public IActionResult DeleteConfirmed(Guid id)
         {
             var enrollment = _context.Enrollments.Find(id);
