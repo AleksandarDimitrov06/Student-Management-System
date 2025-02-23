@@ -1,13 +1,6 @@
 ﻿@model Student_Management_System.Models.Student
 
-<h2>Student_ID: @Model.StudentId</h2>
-
-<br />
-
-
-<h5><strong>FirstName:</strong> @Model.FirstName</h5>
-<h5><strong>LastName:</strong> @Model.LastName</h5>
-
+<h2>Name: @Model.FirstName @Model.LastName</h2>
 <br />
 
 @if (Model.Enrollments != null && Model.Enrollments.Count > 0)

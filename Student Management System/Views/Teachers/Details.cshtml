@@ -1,11 +1,10 @@
 ﻿@model Student_Management_System.Models.Teacher
 
-<h2>Teacher_ID: @Model.TeacherId</h2>
-
-<p><strong>FirstName:</strong> @Model.FirstName</p>
-<p><strong>LastName:</strong> @Model.LastName</p>
+<h2>Name: @Model.FirstName @Model.LastName</h2>
+<br />
 <p><strong>Specialization:</strong> @Model.Specialization</p>
 
+<br />
 @if (Model.Enrollments != null && Model.Enrollments.Count > 0)
 {
     <h4><strong>Enrollments</strong></h4>
